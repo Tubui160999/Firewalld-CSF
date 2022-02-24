@@ -1,4 +1,9 @@
 # 1. Giới thiệu về Firewalld
+# 2. Các khái niệm cơ bản trong Firewalld
+# 3. Cài đặt Firewalld
+# 4. Cấu hình Firewalld
+
+# 1. Giới thiệu về Firewalld
 ## 1.1 Khái niệm
 Firewalld là giải pháp tường lửa mạnh mẽ, toàn diện được cài đặt mặc định trên CentOS/RHEL 7, nhằm thay thế Iptablés với những khác biệt cơ bản:
 - Firewalld sử dụng "zones" và "services" thay vì "chain" và "rules" trong Iptablés
