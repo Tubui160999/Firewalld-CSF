@@ -130,7 +130,7 @@ Chuyển gói tin TCP gửi đến IP 192.168.1.89 đến địa chỉ IP 10.0.0
 ```
 Chuyển gói tin TCP gửi đến IP 192.168.1.89 - port 111 đến địa chỉ IP 10.0.0.1 - port 222
 ```sh
-192.168.1.89|111|*|10.0.0.1|222|*|tcp
+192.168.1.89|111|10.0.0.1|222|tcp
 ```
 Tất cả các gói tin được chuyển hướng đến một địa chỉ IP khác sẽ mang IP nguồn của gói tin là IP của server này chứ không phải là IP gốc của client truy cập
 ## 3.7 Chống SYNFLOOD với CSF 
