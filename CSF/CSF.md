@@ -10,6 +10,7 @@
 
 # 1. Giới thiệu về CSF Firewall
 CSF (ConfigServer Security & Firewall) là tường lửa Stateful Packet Inspection (SPI) mã nguồn mở phổ biến giúp bảo vệ hệ thống sử dụng hệ điều hành Linux. Ngoài các tính năng cơ bản của Firewall là filter packet in/out thì CSF còn hỗ trợ ngăn chặn các cuộc tấn công như Brute Force, DoS
+
 CSF có thể cấu hình block/restrict port để giới hạn port truy cập. Đồng thời CSF duy trì danh sách whitelist và blacklist để kiểm soát truy cập. CSF cũng cung cấp Connection Limiting để giới hạn số lượng kết nối, Rate Limitng để giới hạn tần số truy cập, Real Time Block Liste và Port Scan Tracking (chống Scan Port).
 # 2. Cài đặt CSF
 ```sh
@@ -36,6 +37,7 @@ systemctl stop firewalld
 systemctl disable firewalld
 ```
 Trong /etc/csf/csf.conf thay đổi TESTING = "1" thành TESTING = "0" (Nếu không, daemon lfd sẽ không khởi động được)
+
 Liệt kê các cổng đến và đi được phép dưới dạng danh sách được phân tách bởi dấu phẩy tại 2 dòng (TCP_IN và TCP_OUT)
 ![](./images/hinh1.png)
 - Bước 5: Khởi động lại và kiểm tra CSF
@@ -48,6 +50,7 @@ csf -v
 ![](./images/hinh2.png)
 # 3. Cấu hình CSF
 Cấu hình được thực hiện bằng cách chỉnh sửa các file config khác nhau mà CSF đi kèm. Các file đó nằm trong /etc/csf/
+
 Các config files chính bao gồm:
 - csf.conf: File cấu hình chính, nó có các ghi chú, giải thích chức năng của từng option
 - csf.allow: Danh sách các địa chỉ IP, CIDR được phép thông qua tường lửa (whitelist)
@@ -62,6 +65,7 @@ lfd -r
 ## 3.1 Mở Port
 Mở port là thao tác giúp cho các client ở bên ngoài có thể truy cập vào các port trên server (incomming traffic), hoặc cho phép server mở các kết nối ra ngoài (outgoing traffic)
 Các cổng được mở từ file csf.conf
+
 Tham số TCP_IN/TCP_OUT và UDP_IN/UDP_OUT dùng để khai báo danh sách port, các port được cách nhau bằng dấu phẩy
 - Cho phép user truy cập tới (incomming) các TCP port trên server
 
@@ -91,6 +95,7 @@ Có nghĩa là
 - Nếu IP nào có hơn 20 kết nối TCP đến cổng 80 trong vòng 5s thì sẽ chặn không cho IP đó kết nối đến cổng 80 trong ít nhất 5s sau khi packet cuối cùng được nhìn thấy. Tức là phải có khoảng thời gian "silent" là 5s dành cho IP này trước khi chúng được phép truy cập trở lại
 ## 3.3 PORT KNOCKING
 Port Knocking cho phép client thiết lập kết nối tới một port trên server nhưng bình thường port này không được open public. Server chỉ cho phép clients kết nối tới port chính sau khi client phải hoàn thành một chuỗi knock port thành công.
+
 Tính năng này yêu cầu liệt kê các cổng không sử dụng (ít nhất 3). Các cổng chọn không sử dụng và không xuất hiện trong TCP_IN/UDP_IN. Cổng được mở cũng không được xuất hiện trong TCP_IN/UDP_IN
 - Cấu trúc: "openport;protocol;timeout;port1;port2;port3;port4...portN"
 - Ví dụ
@@ -135,6 +140,7 @@ Chuyển gói tin TCP gửi đến IP 192.168.1.89 - port 111 đến địa ch�
 Tất cả các gói tin được chuyển hướng đến một địa chỉ IP khác sẽ mang IP nguồn của gói tin là IP của server này chứ không phải là IP gốc của client truy cập
 ## 3.7 Chống SYNFLOOD với CSF 
 CSF cung cấp khả năng bảo vệ chống lại các cuộc tấn công SYN FLOOD. Tuy nhiên sẽ làm chậm quá trình khởi tạo mọi kết nối, vì vậy chỉ nên kích hoạt nếu server bị tấn công.
+
 Tần số giới hạn SYNFLOOD_RATE được cấu hình giới hạn tần số SYN của toàn server, chứ không phải giới hạn trên mỗi địa chỉ IP truy cập của client
 ```sh
 SYNFLOOD = "0"
@@ -183,8 +189,11 @@ icmp|in|d=ping|s=44.33.22.11
 ```
 ## 3.10 PORT SCAN TRACKING - Chống Scan Port
 Port scan là một phương pháp để xác định cổng nào trên mạng được mở
+
 CSF có khă năng chặn các địa chỉ IP tham gia vào quá trình port scan bằng cách sử dụng tính năng Port Scan Tracking. Tính năng này hoạt động bằng cách quét các gói tin bị IPtables blocks trong syslog. Nếu địa chỉ IP tạo port block được log nhiều hơn PS_LIMIT trong vòng PS_INTERVAL giây, địa chỉ IP sẽ bị chặn
+
 Ví dụ: Khi PS_INTERVAL được đặt ở giá trị mặc định là 300 và PS_LIMIT được đặt ở 10, bất kỳ địa chỉ IP nào được ghi lại hơn 10 lần trong khoảng thời gian 300 giây sẽ bị chặn
+
 PS_PORTS directive xác định các cổng sẽ được theo dõi bởi port scanning. Trong trường hợp servers xử lý nhiều người dùng và domains hoặc servers sử dụng nhiều FTP, nên tắt Port Scan Tracking cho FTP. FTP tạo ra rất nhiều kết nối và có thể là nguyên nhân block IP sai
 - Nếu muốn bật Scan Port Tracking trong khi tạo điều kiện cho nhiều người dùng FTP nên làm như sau:
 ```sh
@@ -199,6 +208,7 @@ PS_PERMANENT xác định xem một IP sẽ bị block tạm thời hay vĩnh vi
 ![](./images/hinh7.png)
 # 4. LOGIN FAILURE DAEMON (LFD)
 Để bổ sung cho ConfigServer Firewall, một tiến trình daemon chạy mọi lúc và định kỳ (mỗi X giây) quét các log file lấy ra entries mới nhất để phát hiện ra các nỗ lực đăng nhập lỗi liên tục trong một khoảng thời gian ngắn. Những nỗ lực đăng nhập lỗi liên tục như vậy thường được gọi là “Brute-force attacks” và tiến trình daemon phản ứng rất nhanh với các patterns như vậy và chặn các IP vi phạm.
+
 Lfd có khả năng giám sát các giao thức bị lạn dụng phổ biến nhất:
 - SSHD
 - POP3
@@ -236,6 +246,7 @@ cmd:spamd con
 Directory watching cho phép lfd kiểm tra /tmp và /dev/shm và các thư mục thích hợp khác để tìm các file đáng ngờ, các script exploit
 # 5. IP Block List - Cập nhật danh sách IP cần chặn
 Tính năng này cho phép csf/lfd tải xuống định kỳ danh sách địa chỉ IP và CIDR từ published block hoặc black list. Danh sách blocklists được khai báo trong file: /etc/csf/csf.blocklists
+
 Mỗi block list phải được liệt kê dưới dạng 
 NAME|INTERVAL|MAX|URL
 - Name: List name với tất cả các ký tự chữ cái viết hoa không có khoảng trắng và tối đa 25 ký tự - tên này sẽ được sử dụng làm Iptables chain name
