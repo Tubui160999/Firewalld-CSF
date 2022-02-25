@@ -221,6 +221,7 @@ Lfd có khả năng giám sát các giao thức bị lạn dụng phổ biến n
 - DirectAdmin
 - Webmin
 - BIND
+
 Không giống như các ứng dụng khác, lfd là một tiến trình daemon theo dõi logs liên tục, do đó có thể phản ứng trong vòng vài giây sau khi phát hiện những nỗ lực đó. Nó cũng giám sát trên từng giao thức, vì vậy nếu các nỗ lực được thực hiện trên các giao thức khác nhau trong một khoảng thời gian ngắn, tất cả các nỗ lực đó sẽ được tính.
 ## 4.1 Application Trigger - Kích hoạt nguyên tắc chặn IP cho từng ứng dụng 
 ```sh
@@ -271,7 +272,7 @@ csf -d 1.1.1.1
 ```
 - CSF allow IP: cho phép IP 1.1.1.1 truy cập đến server
 ```sh
-csf -d 1.1.1.1
+csf -a 1.1.1.1
 ```
 - csf undeny IP: remove IP 1.1.1.1 đang bị chặn
 ```sh
