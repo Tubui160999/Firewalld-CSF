@@ -120,6 +120,7 @@ ipt_REDIRECT iptables module
 - Cấu trúc DNAT - Destination NAT(Chuyển hướng từ một địa chỉ IP nhận sang địa chỉ IP nhận khác)
 
 IPx|* |IPy|* |tcp/udp (Chuyển tất cả gói tin tcp/udp từ IPx đến IPy)
+
 IPx|portA|IPy|portB|tcp/udp (Chuyển tất cả gói tin tcp/udp từ IPx ở portA đến IPy ở portB)
 
 - Ví dụ DNAT
