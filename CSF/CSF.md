@@ -1,4 +1,14 @@
 # 1. Giới thiệu về CSF Firewall
+# 2. Cài đặt CSF
+# 3. Cấu hình CSF
+# 4. LOGIN FAILURE DAEMON (LFD)
+# 5. IP Block List - Cập nhật danh sách IP cần chặn
+# 6. CSF Allow/Deny theo Country
+# 7. Sử dụng Command line
+
+=============================================================================
+
+# 1. Giới thiệu về CSF Firewall
 CSF (ConfigServer Security & Firewall) là tường lửa Stateful Packet Inspection (SPI) mã nguồn mở phổ biến giúp bảo vệ hệ thống sử dụng hệ điều hành Linux. Ngoài các tính năng cơ bản của Firewall là filter packet in/out thì CSF còn hỗ trợ ngăn chặn các cuộc tấn công như Brute Force, DoS
 CSF có thể cấu hình block/restrict port để giới hạn port truy cập. Đồng thời CSF duy trì danh sách whitelist và blacklist để kiểm soát truy cập. CSF cũng cung cấp Connection Limiting để giới hạn số lượng kết nối, Rate Limitng để giới hạn tần số truy cập, Real Time Block Liste và Port Scan Tracking (chống Scan Port).
 # 2. Cài đặt CSF
@@ -54,13 +64,21 @@ Mở port là thao tác giúp cho các client ở bên ngoài có thể truy c�
 Các cổng được mở từ file csf.conf
 Tham số TCP_IN/TCP_OUT và UDP_IN/UDP_OUT dùng để khai báo danh sách port, các port được cách nhau bằng dấu phẩy
 - Cho phép user truy cập tới (incomming) các TCP port trên server
+
 ![](./images/hinh3.png)
+
 - Cho phép server kết nối ra (outgoing) tới các TCP port bên ngoài
+
 ![](./images/hinh4.png)
+
 - Cho phép user truy cập tới (incomming) các UDP port trên server
+
 ![](./images/hinh5.png)
+
 - Cho phép server kết nối ra (outgoing) tới các UDP port bên ngoài 
+
 ![](./images/hinh6.png)
+
 ## 3.2 PORTFLOOD CSF
 Tính năng này cung cấp khả năng bảo vệ chống lại các cuộc tấn công flood vào port, chẳng hạn như DoS. Có thể chỉ định số lượng kết nối được phép trên port cổng trong khoảng thời gian nào đó. 
 - Cấu trúc: "Port;protocol;hit count;interval seconds"
