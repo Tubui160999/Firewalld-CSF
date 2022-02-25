@@ -7,7 +7,7 @@
 
 # 1. Giới thiệu về Firewalld
 ## 1.1 Khái niệm
-Firewalld là giải pháp tường lửa mạnh mẽ, toàn diện được cài đặt mặc định trên CentOS/RHEL 7, nhằm thay thế Iptablés với những khác biệt cơ bản:
+Firewalld là giải pháp tường lửa mạnh mẽ, toàn diện được cài đặt mặc định trên CentOS/RHEL 7, nhằm thay thế Iptables với những khác biệt cơ bản:
 - Firewalld sử dụng "zones" và "services" thay vì "chain" và "rules" trong Iptables
 - Firewalld quản lý các quy tắc được thiết lập tự động có tác dụng ngay lập tức mà không làm mất đi các kết nối và session hiện có 
 
@@ -20,11 +20,11 @@ Các zone được xác định theo mức độ tin cậy, theo thứ tự từ
 - public: Đại diện cho mạng công cộng, không đáng tin cậy nhưng vẫn cho phép các kết nối đến trên cơ sở chọn từng trường hợp cụ thể
 - external: Hệ thống mạng bên ngoài trong trường hợp sử dụng tường lửa làm gateway, được cấu hình NAT để giữ bảo mật nội bộ mà vẫn có thể truy cập 
 - internal: Sử dụng cho phần bên trong của gateway. Các máy tính/dịch vụ thuộc zone này thì khá đáng tin cậy
-- dmz: Sử dụng cho các máy tính/service trong khu vực DMZ(Demilitarized), các máy tính bị cô lập sẽ không có quyền truy cập vào phần còn lại của hệ thống mạng, chỉ cho phép một số kết nối nhất định 
+- dmz: Sử dụng cho các máy tính/service trong khu vực DMZ (Demilitarized), các máy tính bị cô lập sẽ không có quyền truy cập vào phần còn lại của hệ thống mạng, chỉ cho phép một số kết nối nhất định 
 - work: Sử dụng trong công việc, tin tưởng hầu hết các máy tính và thêm một vài service được hoạt động 
 - trusted: Đáng tin cậy nhất, tin tưởng toàn bộ thiết bị trong hệ thống
 ## 2.2 Quy tắc Runtime/Permanent
-- Runtime(default): Có tác dụng ngay lập tức, mất hiệu lực khi reboot hệ thống
+- Runtime (default): Có tác dụng ngay lập tức, mất hiệu lực khi reboot hệ thống
 - Permanent : Không áp dụng cho hệ thống đang chạy, cần reload mới có hiệu lực, tác dụng vĩnh viễn cả khi reboot hệ thống 
 Ví dụ: Thêm dịch vụ http với zone = public
 ```sh
