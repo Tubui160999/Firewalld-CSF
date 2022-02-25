@@ -141,6 +141,8 @@ SYNFLOOD_BURST = "150"
 ## 3.8 Deny_IP_LIMIT và DENY_TEMP_IP_LIMIT
 DENY_IP_LIMIT đặt số lượng địa chỉ IP tối đa sẽ bị chặn 
 DENY_TEMP_IP_LIMIT có chức năng tương tự nhưng block đối với địa chỉ IP tạm thời
+![](./images/hinh.png)
+
 ## 3.9 CSF Allow/Deny IP theo Port và Protocol
 - Trong /etc/csf/csf.allow và /etc/csf/csf.deny, có thể thêm các filter port và IP bằng cấu trúc sau
 "tcp/udp|in/out|s/d=port|s/d=ip|u=uid"
@@ -240,9 +242,13 @@ NAME|INTERVAL|MAX|URL
 # 6. CSF Allow/Deny theo Country
 Cho phép và từ chối các quốc gia truy cập vào server của mình. Để làm như vậy, cần nhập country code vào dánh sách được tách bằng dấu phẩy
 Ví dụ: 
+
 ![](./images/hinh9.png)
+
 Khi sử dụng CC_ALLOW, IP sẽ được allow mà không quan tâm đến Port. Ta có thể sử dụng CC_ALLOW_PORT để cho phép truy cập từ các quốc gia nhưng vẫn lọc dựa trên port
+
 ![](./images/hinh10.png)
+
 Tượng tự với CC_DENY
 # 7. Sử dụng Command line
 - CSF deny IP: chặn không cho IP 1.1.1.1 truy cập đến server
