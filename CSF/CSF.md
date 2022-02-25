@@ -11,7 +11,7 @@
 # 1. Giới thiệu về CSF Firewall
 CSF (ConfigServer Security & Firewall) là tường lửa Stateful Packet Inspection (SPI) mã nguồn mở phổ biến giúp bảo vệ hệ thống sử dụng hệ điều hành Linux. Ngoài các tính năng cơ bản của Firewall là filter packet in/out thì CSF còn hỗ trợ ngăn chặn các cuộc tấn công như Brute Force, DoS
 
-CSF có thể cấu hình block/restrict port để giới hạn port truy cập. Đồng thời CSF duy trì danh sách whitelist và blacklist để kiểm soát truy cập. CSF cũng cung cấp Connection Limiting để giới hạn số lượng kết nối, Rate Limitng để giới hạn tần số truy cập, Real Time Block Liste và Port Scan Tracking (chống Scan Port).
+CSF có thể cấu hình block/restrict port để giới hạn port truy cập. Đồng thời CSF duy trì danh sách whitelist và blacklist để kiểm soát truy cập. CSF cũng cung cấp Connection Limiting để giới hạn số lượng kết nối, Rate Limitng để giới hạn tần số truy cập, Real Time Block List và Port Scan Tracking (chống Scan Port).
 # 2. Cài đặt CSF
 ```sh
 yum install per1-libwww-per1
