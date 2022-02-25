@@ -119,8 +119,8 @@ ipt_SNAT iptables module
 ipt_REDIRECT iptables module
 - Cấu trúc DNAT - Destination NAT(Chuyển hướng từ một địa chỉ IP nhận sang địa chỉ IP nhận khác)
 
-IPx|* |IPy|* |tcp/udp			- Chuyển tất cả gói tin tcp/udp từ IPx đến IPy
-IPx|portA|IPy|portB|tcp/udp		- Chuyển tất cả gói tin tcp/udp từ IPx ở portA đến IPy ở portB
+IPx|* |IPy|* |tcp/udp (Chuyển tất cả gói tin tcp/udp từ IPx đến IPy)
+IPx|portA|IPy|portB|tcp/udp (Chuyển tất cả gói tin tcp/udp từ IPx ở portA đến IPy ở portB)
 
 - Ví dụ DNAT
 Chuyển gói tin TCP gửi đến IP 192.168.1.89 đến địa chỉ IP 10.0.0.1
